@@ -19,7 +19,6 @@ export class VehiclesController {
 
     @Post()
     createVehicle(@Body() body: VehicleDTO, @Res() response: Response) {
-        Logger.log(body);
         try {
             this.vehicleService.addVehicle(body);
             return response.status(200).send(body);
@@ -30,8 +29,6 @@ export class VehiclesController {
 
     @Put(':id')
     editVehicle(@Param('id') index: any, @Body() body: VehicleDTO, @Req() request: Request, @Res() response: Response) {
-        Logger.log(index);
-        Logger.log(request);
         try {
             this.vehicleService.editVehicle(body, index);
             return response.status(200).send(body);
@@ -42,7 +39,7 @@ export class VehiclesController {
 
     @Delete(':id')
     removeVehicle(@Param('id') index: any, @Req() request: Request, @Res() response: Response) {
-        Logger.log(request);
+        Logger.log(index);
         try {
             this.vehicleService.removeVehicle(index);
             return response.status(204).send();
