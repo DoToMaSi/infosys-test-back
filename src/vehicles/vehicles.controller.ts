@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Req, Res, Logger } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { VehiclesService } from './services/vehicle.service';
+import { VehiclesService } from './vehicle.service';
 import { VehicleDTO } from './models/vehicle.model';
 
 @Controller('vehicles')

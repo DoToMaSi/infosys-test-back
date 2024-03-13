@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { VehicleDTO } from '../models/vehicle.model';
+import { VehicleDTO } from './models/vehicle.model';
 
 @Injectable()
 export class VehiclesService {
