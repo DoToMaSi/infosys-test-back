@@ -1,1 +1,1 @@
-describe('AppController', () => { })
+describe('VehiclesController', () => { })

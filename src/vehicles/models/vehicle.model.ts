@@ -5,4 +5,6 @@ export class VehicleDTO {
     year: number;
     color: string;
     chassis: string;
+    createdOn?: string;
+    lastUpdated?: string;
 }

@@ -14,10 +14,13 @@ export class VehiclesService {
     }
 
     async addVehicle(vehicle: VehicleDTO) {
+        vehicle.createdOn = new Date().toISOString();
+        vehicle.lastUpdated = new Date().toISOString();
         this.vehicles.push(vehicle);
     }
 
     editVehicle(vehicle: VehicleDTO, index: number) {
+        vehicle.lastUpdated = new Date().toISOString();
         this.vehicles[index] = vehicle;
     }
 
