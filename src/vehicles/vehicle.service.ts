@@ -17,19 +17,25 @@ export class VehiclesService {
         vehicle.createdOn = new Date().toISOString();
         vehicle.lastUpdated = new Date().toISOString();
         this.vehicles.push(vehicle);
-        if (this.vehicles.length > 0) {
-            this.vehicles.map((vehicle, index) => {
-                vehicle.index = index;
-            })
-        }
+        this.reviewIndexes()
     }
 
     editVehicle(vehicle: VehicleDTO, index: number) {
         vehicle.lastUpdated = new Date().toISOString();
         this.vehicles[index] = vehicle;
+        this.reviewIndexes();
     }
 
     removeVehicle(index: number) {
         this.vehicles.splice(index, 1);
+        this.reviewIndexes();
+    }
+
+    reviewIndexes() {
+        if (this.vehicles.length > 0) {
+            this.vehicles.map((vehicle, index) => {
+                vehicle.index = index;
+            })
+        }
     }
 }
