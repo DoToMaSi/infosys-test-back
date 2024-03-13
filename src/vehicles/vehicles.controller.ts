@@ -16,6 +16,14 @@ export class VehiclesController {
             return response.status(500).send(error);
         }
     }
+    @Get(':id')
+    getById(@Param('id') index: any, @Res() response: Response) {
+        try {
+            return response.status(200).send(this.vehicleService.getVehiclesById(index));
+        } catch (error) {
+            return response.status(500).send(error);
+        }
+    }
 
     @Post()
     createVehicle(@Body() body: VehicleDTO, @Res() response: Response) {
