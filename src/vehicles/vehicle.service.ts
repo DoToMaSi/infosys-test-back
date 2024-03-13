@@ -5,6 +5,13 @@ import { VehicleDTO } from './models/vehicle.model';
 export class VehiclesService {
     private readonly vehicles: VehicleDTO[] = [];
 
+    // For testing purposes
+    setVehicles(vehicles: VehicleDTO[]) {
+        vehicles.forEach((vehicle) => {
+            this.vehicles.push(vehicle);
+        });
+    }
+
     getVehicles() {
         return this.vehicles;
     }
@@ -17,18 +24,24 @@ export class VehiclesService {
         vehicle.createdOn = new Date().toISOString();
         vehicle.lastUpdated = new Date().toISOString();
         this.vehicles.push(vehicle);
-        this.reviewIndexes()
+        this.reviewIndexes();
+
+        return vehicle;
     }
 
     editVehicle(vehicle: VehicleDTO, index: number) {
         vehicle.lastUpdated = new Date().toISOString();
         this.vehicles[index] = vehicle;
         this.reviewIndexes();
+
+        return vehicle;
     }
 
     removeVehicle(index: number) {
         this.vehicles.splice(index, 1);
         this.reviewIndexes();
+
+        return true;
     }
 
     reviewIndexes() {
