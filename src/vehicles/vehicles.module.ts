@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { VehiclesController } from './vehicles.controller';
-import { VehiclesService } from './vehicle.service';
+import { VehiclesService } from './services/vehicle.service';
 
 export const vehicleDependencies = {
     controllers: [VehiclesController],

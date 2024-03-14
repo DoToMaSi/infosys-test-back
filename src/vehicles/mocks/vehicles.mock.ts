@@ -24,3 +24,15 @@ export const CARS: VehicleDTO[] = [
         index: 1
     }
 ];
+
+export const CAR_MOCK: VehicleDTO = {
+    plate: 'TAQQWDS',
+    brand: 'Porsche',
+    model: '963 LMDh',
+    year: 2023,
+    renavam: 'LEGAL',
+    chassis: 'BACANA',
+    createdOn: '2024-03-13T22:26:39.822Z',
+    lastUpdated: '2024-03-13T22:26:39.822Z',
+    index: 0
+}

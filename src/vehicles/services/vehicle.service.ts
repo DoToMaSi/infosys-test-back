@@ -1,16 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { VehicleDTO } from './models/vehicle.model';
+import { VehicleDTO } from '../models/vehicle.model';
 
 @Injectable()
 export class VehiclesService {
     private readonly vehicles: VehicleDTO[] = [];
-
-    // For testing purposes
-    setVehicles(vehicles: VehicleDTO[]) {
-        vehicles.forEach((vehicle) => {
-            this.vehicles.push(vehicle);
-        });
-    }
 
     getVehicles() {
         return this.vehicles;
