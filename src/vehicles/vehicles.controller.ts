@@ -1,5 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
-import { Response } from 'express';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { VehiclesService } from './services/vehicle.service';
 import { VehicleDTO } from './models/vehicle.model';
 
@@ -9,36 +8,36 @@ export class VehiclesController {
     constructor(private readonly vehicleService: VehiclesService) { }
 
     @Get()
-    public getAll(@Res({ passthrough: true }) response: Response) {
-        response.status(200)
+    @HttpCode(HttpStatus.OK)
+    public getAll() {
         return this.vehicleService.getVehicles();
     }
 
     @Get(':id')
-    getById(@Param('id') index: any, @Res() response: Response) {
+    @HttpCode(HttpStatus.OK)
+    getById(@Param('id') index: any) {
         const vehicle = this.vehicleService.getVehiclesById(index)
-        response.status(200)
         return vehicle;
     }
 
     @Post()
-    createVehicle(@Body() body: VehicleDTO, @Res() response: Response) {
-        this.vehicleService.addVehicle(body);
-        response.status(201)
-        return body;
+    @HttpCode(HttpStatus.CREATED)
+    createVehicle(@Body() body: VehicleDTO) {
+        const vehicle = this.vehicleService.addVehicle(body);
+        return vehicle;
     }
 
     @Put(':id')
-    editVehicle(@Param('id') index: any, @Body() body: VehicleDTO, @Res() response: Response) {
-        this.vehicleService.editVehicle(body, index);
-        response.status(200)
-        return body;
+    @HttpCode(HttpStatus.OK)
+    editVehicle(@Param('id') index: any, @Body() body: VehicleDTO) {
+        const vehicle = this.vehicleService.editVehicle(body, index);
+        return vehicle;
     }
 
     @Delete(':id')
-    removeVehicle(@Param('id') index: any, @Res() response: Response) {
-        this.vehicleService.removeVehicle(index);
-        response.status(204)
-        return {};
+    @HttpCode(HttpStatus.NO_CONTENT)
+    removeVehicle(@Param('id') index: any) {
+        const request = this.vehicleService.removeVehicle(index);
+        return request;
     }
 }

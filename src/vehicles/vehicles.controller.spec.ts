@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { VehiclesController } from './vehicles.controller'
 import { vehicleDependencies } from './vehicles.module';
 import { VehiclesService } from './services/vehicle.service';
-import { response } from 'express';
 import { VehicleDTO } from './models/vehicle.model';
 import { CARS } from './mocks/vehicles.mock';
 
@@ -24,22 +23,18 @@ describe('VehiclesController', () => {
     describe('getAll', () => {
         it('should return an empty array', () => {
             const payload = [];
-            const res = response;
-
             const spy = jest.spyOn(vehicleService, 'getVehicles').mockImplementation(() => payload);
 
-            expect(vehiclesController.getAll(res).length).toEqual(0);
+            expect(vehiclesController.getAll().length).toEqual(0);
             expect(spy).toHaveBeenCalledTimes(1);
         });
 
         it('should return an array with two cars', () => {
             const payload: VehicleDTO[] = CARS;
-            const res = response;
-
             const spy = jest.spyOn(vehicleService, 'getVehicles').mockImplementation(() => payload);
 
-            expect(vehiclesController.getAll(res)).toBe(payload);
-            expect(vehiclesController.getAll(res).length).toEqual(2);
+            expect(vehiclesController.getAll()).toBe(payload);
+            expect(vehiclesController.getAll().length).toEqual(2);
             expect(spy).toHaveBeenCalledTimes(2);
         });
     });
@@ -47,31 +42,25 @@ describe('VehiclesController', () => {
     describe('getById', () => {
         it('should NOT return an vehicle', () => {
             const index = 0;
-            const res = response;
-
             const spy = jest.spyOn(vehicleService, 'getVehiclesById').mockImplementation(() => undefined);
 
-            expect(vehiclesController.getById(index, res)).toBe(undefined);
+            expect(vehiclesController.getById(index)).toBe(undefined);
             expect(spy).toHaveBeenCalledTimes(1);
         });
 
         it('should return an vehicle', () => {
             const index = 0;
-            const res = response;
-
             const spy = jest.spyOn(vehicleService, 'getVehiclesById').mockImplementation(() => CARS[0]);
 
-            expect(vehiclesController.getById(index, res)).toHaveProperty('brand');
+            expect(vehiclesController.getById(index)).toHaveProperty('brand');
             expect(spy).toHaveBeenCalledTimes(1);
         });
 
         it('should return the second vehicle', () => {
             const index = 1;
-            const res = response;
-
             const spy = jest.spyOn(vehicleService, 'getVehiclesById').mockImplementation(() => CARS[index]);
 
-            expect(vehiclesController.getById(index, res)).toBe(CARS[index]);
+            expect(vehiclesController.getById(index)).toBe(CARS[index]);
             expect(spy).toHaveBeenCalledTimes(1);
         });
     });
@@ -79,11 +68,9 @@ describe('VehiclesController', () => {
     describe('createVehicle', () => {
         it('should create a vehicle', () => {
             const carMock = CARS[0];
-            const res = response;
-
             const spy = jest.spyOn(vehicleService, 'addVehicle').mockImplementation(() => CARS[0]);
 
-            expect(vehiclesController.createVehicle(carMock, res)).toBe(carMock);
+            expect(vehiclesController.createVehicle(carMock)).toBe(carMock);
             expect(spy).toHaveBeenCalledTimes(1);
         })
     })
@@ -91,22 +78,20 @@ describe('VehiclesController', () => {
     describe('editVehicle', () => {
         it('should edit a vehicle', () => {
             const carMock = CARS[0];
-            const res = response;
             const index = 0;
             const spy = jest.spyOn(vehicleService, 'editVehicle').mockImplementation(() => CARS[0]);
 
-            expect(vehiclesController.editVehicle(index, carMock, res)).toBe(carMock);
+            expect(vehiclesController.editVehicle(index, carMock)).toBe(carMock);
             expect(spy).toHaveBeenCalledTimes(1);
         })
     });
 
     describe('removeVehicle', () => {
         it('should remove a vehicle', () => {
-            const res = response;
             const index = 0;
             const spy = jest.spyOn(vehicleService, 'removeVehicle').mockImplementation(() => true);
 
-            expect(vehiclesController.removeVehicle(index, res)).toStrictEqual({});
+            expect(vehiclesController.removeVehicle(index)).toStrictEqual(true);
             expect(spy).toHaveBeenCalledTimes(1);
         })
     });
